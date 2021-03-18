@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Export</title>
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+
+  <style>
+    body {
+      margin: 11px;
+    }
+
+    h1 {
+      text-align: center
+    }
+
+    tbody,
+    thead {
+      background-color: #f0eded;
+      text-align: center
+    }
+
+    #bseTable_wrapper {
+      position: absolute;
+      top: 2%;
+      width: 98%;
+    }
+
+    #bseTable_wrapper table thead th {
+      background: #0097EE !important;
+      border: #0097EE !important;
+      color: #fff;
+      font-weight: 200 !important;
+
+    }
+    table.dataTable.no-footer{
+      border: none !important;
+    }
+    #bseTable_wrapper {
+      background: #0097EE !important;
+      margin-bottom: none !important;
+      /* z-index: -1; */
+    }
+
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_desc_disabled:before,
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:after {
+      display: none !important;
+    }
+
+    .table-hover tbody tr {
+      transition: 0.2s !important;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: #d0eeff !important;
+      transition: 0.2s !important
+    }
+
+    table.dataTable {
+      margin: 0 !important;
+    }
+
+    .header {
+      z-index: 1300 !important;
+      position: absolute;
+      color: #fff !important;
+      font-weight: 900 !important;
+      left: 40%;
+    }
+
+    .form-control-sm,
+    .form-control-sm:visited,
+    .form-control-sm:hover,
+    .form-control-sm:active,
+    .form-control-sm:focus {
+      border-radius: 0em !important;
+      border: none !important;
+      background: #8ed6ff;
+      color: #333;
+    }
+
+    .dataTables_filter {
+      padding: 1%;
+    }
+
+    .dataTables_filter label {
+      color: #fff !important;
+    }
+
+    tbody tr:hover {
+      border: 1px solid green;
+    }
+  </style>
+
+</head>
+
+
+<body>
+  <h1 class="header">BSE INDIA</h1>
+
+  <table id="bseTable" class="table table-hover" cellspacing='0' style="width:100%; cursor: pointer;">
+    <thead>
+      <tr>
+        <th>CODE</th>
+        <th>NAME</th>
+        <th>OPEN</th>
+        <th>CLOSE</th>
+        <th>LOW</th>
+        <th>HIGH</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+  <script>
+
+    function setupData() {
+
+      $(document).ready(function () {
+        value = $('.dataTables_filter input').val();
+
+        $('#bseTable').DataTable({
+          "info": false,
+          "paging": false,
+          "sorting": false,
+          "ajax": {
+           url: "/equity_data",
+            },
+              "columns": [
+              {"data": "SC_CODE", "searchable" : false},
+              {"data": "SC_NAME", "orderable": false},
+              {"data": "OPEN", "orderable": false, "searchable" : false},
+              {"data": "CLOSE", "orderable": false, "searchable" : false},
+              {"data": "LOW", "orderable": false, "searchable" : false},
+              {"data": "HIGH", "orderable": false, "searchable" : false}
+          ]
+        });
+      });
+    }
+
+    $(window).on("load", setupData);
+
+
+  </script>
+</body>
+
+</html>
