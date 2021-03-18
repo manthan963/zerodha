@@ -4,3 +4,5 @@ bin/
 
 .pyvenv.cfg
 .include
+
+.idea
